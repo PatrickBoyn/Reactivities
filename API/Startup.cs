@@ -32,6 +32,13 @@ namespace API
                 o.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors(o =>
+            {
+                o.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +55,7 @@ namespace API
             }
             // Won't need HTTPS in dev mode.
             // app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
             app.UseMvc();
         }
     }
