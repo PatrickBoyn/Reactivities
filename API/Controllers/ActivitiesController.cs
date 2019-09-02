@@ -34,5 +34,11 @@ namespace API.Controllers
 
             return detail;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Unit>> Create()
+        {
+
+        }
     }
 }
