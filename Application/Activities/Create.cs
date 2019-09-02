@@ -30,10 +30,23 @@ namespace Application.Activities
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                Activity activity = new Activity
+                Activity act = new Activity
                 {
+                    Id = request.Id,
+                    Title = request.Title,
+                    Description = request.Description,
+                    Category = request.Category,
+                    Date = request.Date,
+                    City = request.City,
+                    Venue = request.Venue
+                };
 
-                }
+                _context.Activities.Add(act);
+                var success = await _context.SaveChangesAsync() > 0;
+
+                if (success)return Unit.Value;
+
+                throw new Exception("Problem saving changes.");
             }
         }
     }
