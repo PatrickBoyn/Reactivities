@@ -22,9 +22,11 @@ namespace Application.Activities
                 _context = context;
             }
 
-            public Task<Activity> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Activity> Handle(Query request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var activity = await _context.Activities.FindAsync(request.Id);
+
+                return activity;
             }
         }
     }
