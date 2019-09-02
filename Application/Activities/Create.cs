@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain;
 using MediatR;
 using Persistence;
 
@@ -25,12 +26,14 @@ namespace Application.Activities
             public Handler(DataContext context)
             {
                 _context = context;
-
             }
 
-            public Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                Activity activity = new Activity
+                {
+
+                }
             }
         }
     }
