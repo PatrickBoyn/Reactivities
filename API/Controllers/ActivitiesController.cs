@@ -36,9 +36,11 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Unit>> Create()
+        public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
+            MediatR.Unit createActivity = await _mediator.Send(command);
 
+            return createActivity;
         }
     }
 }
