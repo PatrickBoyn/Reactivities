@@ -104,6 +104,9 @@ namespace Persistence
                     Venue = "Cinema",
                     }
                 };
+
+                context.Activities.AddRange(activities);
+                context.SaveChanges();
             }
         }
     }
