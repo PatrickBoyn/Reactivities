@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Activities
@@ -19,9 +20,11 @@ namespace Application.Activities
                 _context = context;
             }
 
-            public Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
             {
-                throw new System.NotImplementedException();
+                var activities = await _context.Activities.ToListAsync();
+
+                return activities;
             }
         }
 
