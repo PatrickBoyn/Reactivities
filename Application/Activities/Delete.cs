@@ -8,7 +8,10 @@ namespace Application.Activities
 {
     public class Delete
     {
-        public class Command : IRequest { }
+        public class Command : IRequest
+        {
+            public Guid Id { get; set; }
+        }
 
         public class Handler : IRequestHandler<Command>
         {
@@ -20,8 +23,14 @@ namespace Application.Activities
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
+                Domain.Activity activity = await _context.Activities.FindAsync(request.Id);
 
-                var success = await _context.SaveChangesAsync() > 0;
+                if (activity == null)
+                    throw new Exception("Could not find activity");
+
+                _context.Remove(activity);
+
+                bool success = await _context.SaveChangesAsync() > 0;
 
                 if (success)return Unit.Value;
 
