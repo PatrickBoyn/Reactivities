@@ -42,5 +42,15 @@ namespace API.Controllers
 
             return createActivity;
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Unit>> Edit(Guid id, Edit.Command command)
+        {
+            command.Id = id;
+
+            MediatR.Unit unit = await _mediator.Send(command);
+
+            return unit;
+        }
     }
 }
