@@ -14,7 +14,7 @@ class App extends Component<{}, IState> {
 
   componentDidMount() {
     axios
-      .get('http://localhost:5000/api/activities')
+      .get<IActivity[]>('http://localhost:5000/api/activities')
       .then((response: { data: any }) => {
         this.setState({
           activities: response.data,
@@ -30,7 +30,7 @@ class App extends Component<{}, IState> {
           <Header.Content> Reactivities: </Header.Content>
         </Header>
         <List>
-          {this.state.activities.map((activity: any) => (
+          {this.state.activities.map(activity => (
             <List.Item key={activity.id}>{activity.title}</List.Item>
           ))}
         </List>
