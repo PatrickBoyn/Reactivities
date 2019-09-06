@@ -7,8 +7,8 @@ interface IState {
   activities: IActivity[];
 }
 
-class App extends Component {
-  state = {
+class App extends Component<{}, IState> {
+  readonly state: IState = {
     activities: [],
   };
 
