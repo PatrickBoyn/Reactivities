@@ -18,7 +18,7 @@ const App = () => {
     <Fragment>
       <NavBar />
       <Container style={{ marginTop: '7em' }}>
-        <ActivityDashboard />
+        <ActivityDashboard activities={activities} />
       </Container>
     </Fragment>
   );
