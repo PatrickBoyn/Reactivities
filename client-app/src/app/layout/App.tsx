@@ -11,6 +11,8 @@ const App = () => {
     null
   );
 
+  const handleSelectActivity = (id: string) => {};
+
   useEffect(() => {
     axios.get('http://localhost:5000/api/activities').then(response => {
       setActivities(response.data);
