@@ -7,6 +7,9 @@ import ActivityDashboard from '../../features/activities/dashboard/ActivityDashb
 
 const App = () => {
   const [activities, setActivities] = useState<IActivity[]>([]);
+  const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(
+    null
+  );
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/activities').then(response => {
