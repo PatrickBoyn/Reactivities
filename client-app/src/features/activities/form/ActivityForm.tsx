@@ -40,17 +40,17 @@ const ActivityForm: React.FC<IProps> = (
       let newActivity = {
         ...activity,
         id: uuid()
-      }
+      };
       createActivity(newActivity);
     } else {
       editActivity(activity);
     }
-  }
+  };
   
   const handleInpuChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const {name, value} = event.currentTarget;
       setActivity({...activity, [name]: value});
-  }
+  };
   
   return (
     <Segment clearing>
@@ -74,7 +74,7 @@ const ActivityForm: React.FC<IProps> = (
         <Form.Input
             onChange={handleInpuChange}    
             name='date'
-            type='date' 
+            type='datetime-local' 
             placeholder='Date' 
             value={activity.date}/>
         <Form.Input
