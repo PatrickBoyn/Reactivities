@@ -11,8 +11,10 @@ const App = () => {
     const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(
         null
     );
+    //States
     const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [ submitting, setSubmitting] = useState(false);
     
     const handleSelectActivity = (id: string) => {
         setSelectedActivity(activities.filter(a => a.id === id)[0]);
@@ -25,25 +27,28 @@ const App = () => {
     };
 
     const handleCreateActivity = (activity: IActivity) => {
+        setSubmitting(true);
         agent.Activities.create(activity).then(() => {
             setActivities([...activities, activity]);
             setSelectedActivity(activity);
             setEditMode(false); 
-        });
+        }).then(() => setSubmitting(false));
     };
 
     const handleEditActivity = (activity: IActivity) => {
+        setSubmitting(true);
         agent.Activities.update(activity).then(() => {
             setActivities([...activities.filter(a => a.id !== activity.id), activity]);
             setSelectedActivity(activity);
             setEditMode(false); 
-        });
+        }).then(() => setSubmitting(false));
     };
     
     const handleDeleteActivity = (id: string) => {
+        setSubmitting(true);
         agent.Activities.delete(id).then(() => {
             setActivities([...activities.filter(a => a.id !== id)]) 
-        });
+        }).then(() => setSubmitting(false));
     };
 
     useEffect(() => {
@@ -74,6 +79,7 @@ const App = () => {
                     createActivity={handleCreateActivity}
                     editActivity={handleEditActivity}
                     deleteActivity={handleDeleteActivity}
+                    submitting={submitting}
                 />
             </Container>
         </Fragment>
