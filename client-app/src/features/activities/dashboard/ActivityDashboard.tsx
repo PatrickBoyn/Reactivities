@@ -11,7 +11,6 @@ interface IProps {
   activities: IActivity[];
   setEditMode: (editMode: boolean) => void;
   setSelectedActivity: (activity: IActivity | null) => void;
-  editActivity: (activity: IActivity) => void;
   deleteActivity: (e: SyntheticEvent<HTMLButtonElement>, id: string) => void;
   submitting: boolean;
   target: string;
@@ -19,8 +18,6 @@ interface IProps {
 
 const ActivityDashboard: React.FC<IProps> = ({
   setEditMode,
-  setSelectedActivity,
-  editActivity,
   deleteActivity,
   submitting,
   target  
@@ -38,17 +35,12 @@ const ActivityDashboard: React.FC<IProps> = ({
       <Grid.Column width={6}>
         {/* Displays the activity if it's not null. */}
         {selectedActivity && !editMode && (
-          <ActivityDetails
-            setEditMode={setEditMode}
-            setSelectedActivity={setSelectedActivity}
-          />
+          <ActivityDetails/>
         )}
         {editMode && <ActivityForm
             key={selectedActivity && selectedActivity.id || 0}    
             setEditMode={setEditMode}
-            activity={selectedActivity!} 
-            editActivity={editActivity}
-            submitting={submitting}/>}
+            activity={selectedActivity!}/>}
       </Grid.Column>
     </Grid>
   );
