@@ -58,6 +58,10 @@ class ActivityStore {
         }
     };
     
+    @action deleteActivity = async (id: string ) => {
+        
+    };
+    
     @action openCreateForm = () => {
         this.editMode = true;
         this.selectedActivity = undefined;
