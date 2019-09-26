@@ -18,14 +18,18 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({match}) => {
     cancelFormOpen, 
     submitting, 
     activity: initialFormState,
-    loadActivity  
+    loadActivity,
+    clearActivity  
   } = activityStore;
   
   useEffect(() => {
     if (match.params.id){
       loadActivity(match.params.id).then(() => initialFormState && setActivity(initialFormState));
     }
-  });
+    return () => {
+        clearActivity();
+    }
+  }, [loadActivity, clearActivity, match.params.id, initialFormState]);
 
   const [activity, setActivity] = useState<IActivity>({
     id: '',
