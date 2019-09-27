@@ -15,7 +15,6 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({match, histo
   const { 
     createActivity, 
     editActivity, 
-    cancelFormOpen, 
     submitting, 
     activity: initialFormState,
     loadActivity,
@@ -34,7 +33,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({match, histo
   });
 
   useEffect(() => {
-    if (match.params.id && activity.id.length == 0){
+    if (match.params.id && activity.id.length === 0){
       loadActivity(match.params.id).then(() => initialFormState && setActivity(initialFormState));
     }
     return () => {
@@ -100,7 +99,7 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({match, histo
             positive 
             type='submit' 
             content='Submit'/>
-        <Button onClick={ cancelFormOpen } floated='right' type='button' content='Cancel'/>
+        <Button onClick={ () => history.push('/activities') } floated='right' type='button' content='Cancel'/>
       </Form>
     </Segment>
   );
