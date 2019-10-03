@@ -6,7 +6,7 @@ import {
     CommentAvatar,
     Comment,
     CommentAuthor,
-    CommentContent, CommentMetadata, CommentText, CommentActions, Form, FormTextArea, Button
+    CommentContent, CommentMetadata, CommentText, CommentActions, Form,  Button
 } from "semantic-ui-react";
 
 const ActivityDetailedChat = () => {
